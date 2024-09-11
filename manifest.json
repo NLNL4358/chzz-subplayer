@@ -1,0 +1,22 @@
+{
+    "name" : "kjs",
+    "description" : "인턴 프로젝트",
+    "version" : "1.0",
+    "manifest_version" : 3,
+    "permissions": [
+        "storage",
+        "identity"
+    ],    
+    "action" : {
+        "default_icon" : {
+            "16" : "./assets/images/icon.png",
+            "24" : "./assets/images/icon.png",
+            "32" : "./assets/images/icon.png"
+        },
+        "default_popup" : "index.html"
+    },
+    "oauth2": {
+        "client_id": "_hmVVnvtB0bPAc6HaaZz",
+        "scopes": ["https://www.googleapis.com/auth/userinfo.email"]
+    }
+}

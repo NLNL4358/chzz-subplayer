@@ -1,0 +1,52 @@
+.indexInner{
+    min-height: 400px;
+    min-width: 300px;
+
+    background-color: var(--background-dark);
+
+    padding: 1rem;
+}
+
+.header{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.header>h4{
+    font-weight: bolder;
+    color : var(--naver-color)
+}
+
+.account{
+    margin-top: 1rem;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.userNameInner>h4{
+    font-weight: bolder;
+}
+
+.loginButton{
+    font-size: var(--span-size);
+    font-weight: bolder;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+
+    width: 5.3333333rem;
+    height: 2rem;
+
+    border: 2px solid var(--naver-color);
+    border-radius: 2rem;
+
+    background-color: var(--background-dark);
+    transition: 0.2s;
+}
+    .loginButton:active{
+        background-color: var(--naver-color);
+        color : var(--background-dark)
+    }

@@ -1,0 +1,106 @@
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css");
+
+
+*{
+  margin: 0px;
+  padding: 0px;
+  list-style: none;
+  color: #F0F0F0;
+  text-decoration: none;
+  /* font-family: 'SUIT-Regular'; */
+  font-family: 'Pretendard Variable', sans-serif;
+  box-sizing: border-box;
+
+  font-size : 15px;
+  font-weight: normal;
+  pointer-events : auto;
+  white-space: nowrap;
+
+}
+
+a, abbr, acronym, address, applet, b, big, blockquote, button, caption, center, cite, code, dd, del, dfn, div, dl, dt, em, fieldset, font, footer, form, h1, h2, h3, h4, h5, h6, header, i, iframe, img, ins, kbd, label, legend, li, nav, object, ol, p, pre, q, s, samp, section, small, span, strike, strong, sub, sup, table, tbody, td, tfoot, th, thead, title, tr, tt, u, ul, var {
+  background: transparent;
+  border: 0px;
+  margin: 0px;
+  outline: 0px;
+  padding: 0px;
+  vertical-align: baseline;
+}
+
+:root{
+
+  /* size - html 기본값 16px 기준*/
+  --h1-size: 3.5rem; /* 40px; */
+  --h2-size: 2.4rem;/* 36px */
+  --h3-size: 1.6666rem;/* 34px */
+  --h4-size: 1.46rem;/* 22px */
+  --h5-size: 1.333rem;/* 20px */
+  --p-size: 1.2rem;/* 18px */
+  --span-size: 1.00rem;/* 15px */
+  --small-size: 0.875rem; /* 14px */
+ 
+  /* color */
+  --background-dark : #191919;
+  --naver-color : #00FFA3;
+  
+  /* border-radius */
+  --radius-normal : 1rem;
+}
+
+h1{
+  /* 56px */
+  font-size: var(--h1-size);
+  font-weight: bold;
+}
+h2{
+  /* 45px */
+  font-size: var(--h2-size);
+  font-weight: bold;
+}
+h3{
+  /* 40px */
+  font-size: var(--h3-size);
+  font-weight: 700;
+}
+h4{
+  /* 25px */
+  font-size: var(--h4-size);
+  font-weight: 500;
+}
+h5{
+  /* 20px */
+  font-size: var(--h5-size);
+  font-weight: 500;
+}
+p{
+  /* 18px */
+  font-size : var(--p-size);
+  font-weight: 500;
+}
+span{
+  /* 18px */
+  font-size: var(--span-size);
+  font-weight: 300;
+
+}
+
+body{
+  /* 15px */
+  font-size: var(--span-size);
+  font-weight: 500;
+}
+
+small{
+  /* 14px */
+  font-size: var(--small-size);
+  font-weight: 300;
+}
+
+button{
+  background-color: transparent;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
