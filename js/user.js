@@ -3,40 +3,40 @@ const redirectURI = `https://jeconklphjefminemfpibahohjiookne.chromiumapp.org/pr
 const supabaseFunctionURL = 'https://ykorbmtrpjhatgnhbjbp.supabase.co/functions/v1/get-naver-token';    // 로그인 시도 supabase Function 요청 URL 
 const supabaseUserInfoURL = 'https://ykorbmtrpjhatgnhbjbp.supabase.co/functions/v1/get-user-info';      // 유저정보 가저오는 supabase Function 요청 URL
 
-document.addEventListener('DOMContentLoaded', () => {
-    document.querySelector(".loginButton").addEventListener("click", function () {
 
-        chrome.runtime.sendMessage({action : 'get isLogin'}).then(isLogin => {
-          if(isLogin) {
-            /* 이미 로그인 상태면 로그아웃 */
-            chrome.runtime.sendMessage({action : 'set logout'})
-            changeLoginStateTextHandler("logout")
-            return;
-          }
-        })
+loginButton.addEventListener("click", function () {
+    chrome.runtime.sendMessage({action : 'get isLogin'}).then(response => {
+        const {isLogin, userInfo} = response;
+        if(isLogin) {
+          /* 이미 로그인 상태면 로그아웃 */
+          chrome.runtime.sendMessage({action : 'set logout'})
+          changeLoginStateTextHandler("logout")
+          return;
+        }
+    })
 
-        //로딩 팝업 띄우기
-        popupManager("loading");
+    //로딩 팝업 띄우기
+    popupManager("loading");
         
-        const state = Math.random().toString(36).substr(2, 10); // 랜덤 상태 값 생성
-        const apiURL = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${clientId}&redirect_uri=${redirectURI}&state=${state}`;
+    const state = Math.random().toString(36).substr(2, 10); // 랜덤 상태 값 생성
+    const apiURL = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${clientId}&redirect_uri=${redirectURI}&state=${state}`;
 
-        chrome.identity.launchWebAuthFlow({
-            url: apiURL,
-            interactive: true
-        }, function(redirect_url) {
-            if (chrome.runtime.lastError || redirect_url.includes('error')) {
-                console.error(chrome.runtime.lastError);
-            } else {
-                const urlParams = new URLSearchParams(new URL(redirect_url).search);
-                const code = urlParams.get('code');
-                getAccessToken(code).then(accessToken => {
-                    return fetchUserInfoFromSupabase(accessToken);
-                }).catch(error => console.error(error));
-            }
-        });
+    chrome.identity.launchWebAuthFlow({
+        url: apiURL,
+        interactive: true
+    }, function(redirect_url) {
+        if (chrome.runtime.lastError || redirect_url.includes('error')) {
+            console.error(chrome.runtime.lastError);
+        } else {
+            const urlParams = new URLSearchParams(new URL(redirect_url).search);
+            const code = urlParams.get('code');
+            getAccessToken(code).then(accessToken => {
+                return fetchUserInfoFromSupabase(accessToken);
+            }).catch(error => console.error(error));
+        }
     });
 });
+
 // 콜백 URL에서 코드 받고 Supabase 로그인 시도 함수로 토큰을 요청하는 코드
 async function getAccessToken(code) {
     const response = await fetch(`${supabaseFunctionURL}?code=${code}`, {
@@ -76,7 +76,7 @@ async function fetchUserInfoFromSupabase(accessToken) {
 
         chrome.runtime.sendMessage({action : 'set login', userInfo : userInfo})
 
-        changeLoginStateTextHandler("login")
+        changeLoginStateTextHandler()
         popupManager("");
     } else {
         console.error("Failed to fetch user info from Supabase");

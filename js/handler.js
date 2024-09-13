@@ -9,11 +9,6 @@
  * ----
  */
 
-/* DOM */
-const loginButton = document.querySelector(".loginButton");
-const userNameHead = document.querySelector(".userNameHead");
-const userNameTail = document.querySelector(".userNameTail");
-
 
 /* Function */
 
@@ -22,15 +17,16 @@ const userNameTail = document.querySelector(".userNameTail");
  * @case_login 로그인으로 변경된 경우
  * @case_logout 로그아웃으로 변경된 경우
  */
-const changeLoginStateTextHandler = (status) => {
-    chrome.runtime.sendMessage({action : 'get userInfo'}).then(userInfo => {
-        switch(status){
-            case "login" :
+const changeLoginStateTextHandler = () => {
+    chrome.runtime.sendMessage({action : 'get isLogin'}).then(response => {
+        const {isLogin, userInfo} = response;
+        switch(isLogin){
+            case true :
                 loginButton.innerText = "로그아웃"
                 userNameHead.innerText = userInfo.nickname
                 userNameTail.innerText = "님"
                 return
-            case "logout" :
+            case false :
                 loginButton.innerText = "로그인"
                 userNameHead.innerText = ""
                 userNameTail.innerText = "비로그인 상태"
@@ -56,10 +52,6 @@ const popupManager = (status) => {
 }
 
 /* Event-Handler */
-
-
-
-/* Init */
 
 
 

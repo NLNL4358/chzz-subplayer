@@ -30,10 +30,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     switch (message.action) {
             /* === 요청 === */
         case 'get isLogin':
-            sendResponse(isLogin);
-            break;
-        case 'get userInfo':
-            sendResponse(userInfo);
+            sendResponse({isLogin, userInfo});
             break;
         case 'get mode':
             sendResponse(mode);
