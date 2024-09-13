@@ -41,8 +41,10 @@ a, abbr, acronym, address, applet, b, big, blockquote, button, caption, center, 
  
   /* color */
   --background-dark : #191919;
+  --background-darkgray : #333333;
   --background-popup : #000000dd;
   --naver-color : #00FFA3;
+  --green-color : #04D087;
   
   /* border-radius */
   --radius-normal : 1rem;

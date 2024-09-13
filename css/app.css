@@ -101,3 +101,46 @@
 .loadingImage{
     width: 20%;
 }
+
+.mode{
+    margin-top: 1.5rem;
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1rem;
+}   
+.mode>span{
+    font-weight: bolder;
+    
+}
+
+.switch{
+    width: 2.67rem;
+    height : 1.34rem;
+    border-radius: 1.67rem;
+
+    position: relative;
+    background-color: var(--background-darkgray);
+    transition: 0.2s;
+}
+    .switch.on{
+        background-color: var(--green-color);
+    }
+.switchCircle{
+    width: 1.2rem;
+    height: 1.2rem;
+    background-color: white;
+    border-radius: 50%;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.25);
+    
+    position: absolute;
+    top: 50%;
+    left: 2px;
+
+    transform: translate(-0%, -50%);
+    transition: 0.2s;
+}
+    .switch.on .switchCircle{
+        left : 20px;
+    }

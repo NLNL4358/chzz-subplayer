@@ -17,11 +17,11 @@
 /**
  * @param isLogin : 로그인 상태
  * @param userInfo : 로그인 한 유저의 정보
- * @param mode : 사용자의 모드를 설정합니다. viewer : 시청자 / streamer : 스트리머
+ * @param mode : 사용자의 모드를 설정합니다. false : 시청자 / true : 스트리머
  */
 let isLogin = false;
 let userInfo = {};
-let mode = "viewer"
+let mode = false;
 
 
 /* === 메세지 리스너 === */
