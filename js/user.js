@@ -1,12 +1,3 @@
-
-/* local 정보로 남겨야할 요소
-    1. 로그인 상태
-    2. 유저 정보
-*/
-
-let isLogin = false;
-let userInfo = {};
-
 const clientId = "_hmVVnvtB0bPAc6HaaZz";  // 네이버에서 발급받은 클라이언트 ID
 const redirectURI = `https://jeconklphjefminemfpibahohjiookne.chromiumapp.org/provider_cb`;  // 네이버에서 설정한 콜백 URL
 const supabaseFunctionURL = 'https://ykorbmtrpjhatgnhbjbp.supabase.co/functions/v1/get-naver-token';    // 로그인 시도 supabase Function 요청 URL 
@@ -14,13 +5,15 @@ const supabaseUserInfoURL = 'https://ykorbmtrpjhatgnhbjbp.supabase.co/functions/
 
 document.addEventListener('DOMContentLoaded', () => {
     document.querySelector(".loginButton").addEventListener("click", function () {
-        if(isLogin)
-        {
+
+        chrome.runtime.sendMessage({action : 'get isLogin'}).then(isLogin => {
+          if(isLogin) {
             /* 이미 로그인 상태면 로그아웃 */
-            isLogin = false;
+            chrome.runtime.sendMessage({action : 'set logout'})
             changeLoginStateTextHandler("logout")
             return;
-        }
+          }
+        })
 
         //로딩 팝업 띄우기
         popupManager("loading");
@@ -79,10 +72,10 @@ async function fetchUserInfoFromSupabase(accessToken) {
             nickname: profileData.nickname,
             age: profileData.age,
         };
-        console.log(isLogin);
         console.log(userInfo);
 
-        isLogin = true;
+        chrome.runtime.sendMessage({action : 'set login', userInfo : userInfo})
+
         changeLoginStateTextHandler("login")
         popupManager("");
     } else {

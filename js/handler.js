@@ -14,11 +14,6 @@ const loginButton = document.querySelector(".loginButton");
 const userNameHead = document.querySelector(".userNameHead");
 const userNameTail = document.querySelector(".userNameTail");
 
-/* 변수 */
-/**
- * @param mode : 사용자의 모드를 설정합니다. viewer : 시청자 / streamer : 스트리머
- */
-const mode = "viewer"
 
 /* Function */
 
@@ -28,23 +23,25 @@ const mode = "viewer"
  * @case_logout 로그아웃으로 변경된 경우
  */
 const changeLoginStateTextHandler = (status) => {
-    switch(status){
-        case "login" :
-            loginButton.innerText = "로그아웃"
-            userNameHead.innerText = userInfo.nickname
-            userNameTail.innerText = "님"
-            return
-        case "logout" :
-            loginButton.innerText = "로그인"
-            userNameHead.innerText = ""
-            userNameTail.innerText = "비로그인 상태"
-            return
-        default : 
-            loginButton.innerText = "로그아웃"
-            userNameHead.innerText = userInfo.nickname
-            userNameTail.innerText = "님"
-            return
-    }
+    chrome.runtime.sendMessage({action : 'get userInfo'}).then(userInfo => {
+        switch(status){
+            case "login" :
+                loginButton.innerText = "로그아웃"
+                userNameHead.innerText = userInfo.nickname
+                userNameTail.innerText = "님"
+                return
+            case "logout" :
+                loginButton.innerText = "로그인"
+                userNameHead.innerText = ""
+                userNameTail.innerText = "비로그인 상태"
+                return
+            default : 
+                loginButton.innerText = "로그아웃"
+                userNameHead.innerText = userInfo.nickname
+                userNameTail.innerText = "님"
+                return
+        }
+    });
 }
 
 const popupManager = (status) => {

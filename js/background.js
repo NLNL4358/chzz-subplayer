@@ -7,32 +7,48 @@
  * 
  * background.js 에서 선한된 변수를 popup(user.js, handler.js)에서 조작하려면 일반적인 방법으론 불가능!! 
  * ㄴ => 메세지 기반 통신을 통해 변경해야한다.
+ * 
+ * background.js 에서 변수를 popup이 가져갈땐 Promise 형태로 주기때문에 .then을 이용해야한다.
  */
 
 
 
 /* === 변수 === */
+/**
+ * @param isLogin : 로그인 상태
+ * @param userInfo : 로그인 한 유저의 정보
+ * @param mode : 사용자의 모드를 설정합니다. viewer : 시청자 / streamer : 스트리머
+ */
 let isLogin = false;
 let userInfo = {};
+let mode = "viewer"
 
 
 /* === 메세지 리스너 === */
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
-    // 로그인 정보를 요청받으면 보내준다
-    if(message.action === 'getLoginState') {
-        sendResponse({isLogin, userInfo})
-    }
+    switch (message.action) {
+            /* === 요청 === */
+        case 'get isLogin':
+            sendResponse(isLogin);
+            break;
+        case 'get userInfo':
+            sendResponse(userInfo);
+            break;
+        case 'get mode':
+            sendResponse(mode);
+            break;
 
-    // 로그인 햇다.
-    if(message.action === 'login') {
-        isLogin = true;
-        userInfo = message.userInfo;        
-    }
-
-    // 로그아웃 했다.
-    if(message.action === 'logout') {
-        isLogin = false;
-        userInfo = {}
+            /* === 수정 === */
+        case 'set login':
+            isLogin = true;
+            userInfo = message.userInfo;
+            break;
+        case 'set logout':
+            isLogin = false;
+            userInfo = {};
+            break;
+        default:
+            console.error('Unknown action:', message.action);
     }
 });
