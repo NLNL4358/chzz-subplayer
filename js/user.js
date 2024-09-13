@@ -21,6 +21,9 @@ document.addEventListener('DOMContentLoaded', () => {
             changeLoginStateTextHandler("logout")
             return;
         }
+
+        //로딩 팝업 띄우기
+        popupManager("loading");
         
         const state = Math.random().toString(36).substr(2, 10); // 랜덤 상태 값 생성
         const apiURL = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${clientId}&redirect_uri=${redirectURI}&state=${state}`;
@@ -76,10 +79,12 @@ async function fetchUserInfoFromSupabase(accessToken) {
             nickname: profileData.nickname,
             age: profileData.age,
         };
-        isLogin = true;
-            changeLoginStateTextHandler("login")
         console.log(isLogin);
         console.log(userInfo);
+
+        isLogin = true;
+        changeLoginStateTextHandler("login")
+        popupManager("");
     } else {
         console.error("Failed to fetch user info from Supabase");
     }

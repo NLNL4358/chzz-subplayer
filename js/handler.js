@@ -14,6 +14,12 @@ const loginButton = document.querySelector(".loginButton");
 const userNameHead = document.querySelector(".userNameHead");
 const userNameTail = document.querySelector(".userNameTail");
 
+/* 변수 */
+/**
+ * @param mode : 사용자의 모드를 설정합니다. viewer : 시청자 / streamer : 스트리머
+ */
+const mode = "viewer"
+
 /* Function */
 
 /**
@@ -41,6 +47,16 @@ const changeLoginStateTextHandler = (status) => {
     }
 }
 
+const popupManager = (status) => {
+    document.querySelectorAll(".popup").forEach(item => item.classList.remove("on"))
+    switch(status){
+        case "loading" :
+            document.querySelector(".loadingPopup").classList.add("on")
+            return
+        default :
+            return
+    }
+}
 
 /* Event-Handler */
 

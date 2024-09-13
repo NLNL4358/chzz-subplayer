@@ -1,10 +1,13 @@
 .indexInner{
     min-height: 400px;
+    height: 100%;
     min-width: 300px;
+    width: 100%;
 
     background-color: var(--background-dark);
 
     padding: 1rem;
+    position: relative;
 }
 
 .header{
@@ -26,9 +29,20 @@
     align-items: center;
 }
 
+.userNameInner{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
 .userNameInner>h4{
     font-weight: bolder;
 }
+
+.userNameHead{
+    color : var(--naver-color)
+}
+
 
 .loginButton{
     font-size: var(--span-size);
@@ -50,3 +64,40 @@
         background-color: var(--naver-color);
         color : var(--background-dark)
     }
+
+
+
+/* 팝업 */
+.popup{
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    min-width: 100%;
+    min-height: 100%;
+
+    background-color: var(--background-popup);
+
+    transition: 0.3s;
+    opacity: 0;
+    pointer-events: none;
+}
+.popup *{
+    pointer-events: none;
+}
+    .popup.on{
+        opacity: 1;    
+        pointer-events: initial;
+    }
+    .popup.on *{
+        pointer-events: initial;
+    }
+
+.loadingPopup{
+    justify-content: center;
+    align-items: center;
+}
+
+.loadingImage{
+    width: 20%;
+}

@@ -18,5 +18,15 @@
     "oauth2": {
         "client_id": "_hmVVnvtB0bPAc6HaaZz",
         "scopes": ["https://www.googleapis.com/auth/userinfo.email"]
-    }
+    },
+    "web_accessible_resources":[
+        {
+            "resources":[
+                "assets/images/loading.gif"
+            ],
+            "matches":[
+                "<all_urls>"
+            ]
+        }
+    ]
 }
