@@ -20,6 +20,7 @@
 const changeLoginStateTextHandler = () => {
     chrome.runtime.sendMessage({action : 'get isLogin'}).then(response => {
         const {isLogin, userInfo} = response;
+        console.log(isLogin, userInfo)
         switch(isLogin){
             case true :
                 loginButton.innerText = "로그아웃"
@@ -40,6 +41,29 @@ const changeLoginStateTextHandler = () => {
     });
 }
 
+const changeModeStateHandler = () => {
+    chrome.runtime.sendMessage({action : 'get mode'}).then(response => {
+        console.log(response)
+        modeChanger(response);
+    })
+}
+
+const modeChanger = (status) => {
+    switch(status){
+        case true : 
+            streamerSwitch.classList.add("on")
+            break;
+        case false :
+            streamerSwitch.classList.remove("on")
+            break;
+    }   
+}
+
+/**
+ * 팝업관리자 함수
+ * @param {*} status : status에 따라서 동작을 switch, case로 다르게 동작
+ * @returns 
+ */
 const popupManager = (status) => {
     document.querySelectorAll(".popup").forEach(item => item.classList.remove("on"))
     switch(status){
@@ -52,6 +76,10 @@ const popupManager = (status) => {
 }
 
 /* Event-Handler */
-
+streamerSwitch.addEventListener("click", () => {
+    chrome.runtime.sendMessage({action: 'set mode'}).then(response => {
+        modeChanger(response)
+    });
+})
 
 

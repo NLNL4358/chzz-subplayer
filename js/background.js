@@ -8,7 +8,10 @@
  * background.js 에서 선한된 변수를 popup(user.js, handler.js)에서 조작하려면 일반적인 방법으론 불가능!! 
  * ㄴ => 메세지 기반 통신을 통해 변경해야한다.
  * 
- * background.js 에서 변수를 popup이 가져갈땐 Promise 형태로 주기때문에 .then을 이용해야한다.
+ * !!! background.js 에서 변수를 popup이 가져갈땐 Promise 형태로 주기때문에 .then을 이용해야한다.
+ * 
+ * 
+ * Chrome의 서비스워커가 자꾸 비활성 상태일때 이 스크립트를 끄게되기 때문에 이를 방지하기위해 chrome.storage를 이용하여야 한다.
  */
 
 
@@ -23,6 +26,12 @@ let isLogin = false;
 let userInfo = {};
 let mode = false;
 
+// 서비스 워커가 시작될 때 저장된 상태를 불러옴
+chrome.storage.local.get(['isLogin', 'userInfo', 'mode'], (result) => {
+    isLogin = result.isLogin ?? false;
+    userInfo = result.userInfo ?? {};
+    mode = result.mode ?? false;
+});
 
 /* === 메세지 리스너 === */
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
@@ -40,12 +49,27 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
         case 'set login':
             isLogin = true;
             userInfo = message.userInfo;
+            saveState();
             break;
         case 'set logout':
             isLogin = false;
             userInfo = {};
+            saveState();
             break;
+
+        case 'set mode':
+            mode = !mode;
+            sendResponse(mode);
+            saveState();
+            break
+        
         default:
             console.error('Unknown action:', message.action);
     }
 });
+
+
+// 상태를 chrome.storage.local에 저장하는 함수
+function saveState() {
+    chrome.storage.local.set({ isLogin, userInfo, mode });
+}
