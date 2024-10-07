@@ -66,42 +66,6 @@
     }
 
 
-
-/* 팝업 */
-.popup{
-    display: flex;
-    position: fixed;
-    top: 0;
-    left: 0;
-    min-width: 100%;
-    min-height: 100%;
-
-    background-color: var(--background-popup);
-
-    transition: 0.3s;
-    opacity: 0;
-    pointer-events: none;
-}
-.popup *{
-    pointer-events: none;
-}
-    .popup.on{
-        opacity: 1;    
-        pointer-events: initial;
-    }
-    .popup.on *{
-        pointer-events: initial;
-    }
-
-.loadingPopup{
-    justify-content: center;
-    align-items: center;
-}
-
-.loadingImage{
-    width: 20%;
-}
-
 .mode{
     margin-top: 1.5rem;
     width: 100%;
@@ -144,3 +108,113 @@
     .switch.on .switchCircle{
         left : 20px;
     }
+
+
+.input{
+    width: 100%;
+    margin-top: 1rem;
+}
+
+.inputInner{
+    justify-content: flex-start;
+    align-items: center;
+    gap: 0.25rem;
+
+    display: none;
+}
+    .inputInner.on{
+        display: flex;
+    }
+
+.inputImage{
+    width: 1.5rem;
+    height: auto;
+}
+.inputP{
+    font-weight: bold;
+}
+.inputField{
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 2rem;
+    background-color: var(--background-darkgray);
+
+    font-size: 1rem;
+    color: white;
+    padding: 0px 10px;
+    border-radius: 5px;
+
+    outline: none;
+    border: none;
+}
+.inputField::placeholder{
+    font-weight: bold;
+}
+    
+/* 팝업 */
+.popup{
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    min-width: 100%;
+    min-height: 100%;
+
+    background-color: var(--background-popup);
+
+    transition: 0.3s;
+    opacity: 0;
+    pointer-events: none;
+}
+.popup *{
+    pointer-events: none;
+}
+    .popup.on{
+        opacity: 1;    
+        pointer-events: initial;
+    }
+    .popup.on *{
+        pointer-events: initial;
+    }
+
+.loadingPopup{
+    justify-content: center;
+    align-items: center;
+}
+
+.loadingImage{
+    width: 20%;
+}
+
+.popupSize1{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    transform: translate(-50%, -50%);
+
+    max-width: 80%;
+    max-height: 80%;
+
+    padding: 2rem;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    
+    background-color: var(--background-darkgray);
+    border-radius: var(--radius-normal);
+    border: 4px solid var(--naver-color);
+}
+
+.popupButtonWrap{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    gap: 2rem;
+    align-items: center;
+}

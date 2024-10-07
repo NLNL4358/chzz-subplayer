@@ -17,8 +17,8 @@
  * @case_login 로그인으로 변경된 경우
  * @case_logout 로그아웃으로 변경된 경우
  */
-const changeLoginStateTextHandler = () => {
-    chrome.runtime.sendMessage({action : 'get isLogin'}).then(response => {
+const changeLoginStateTextHandler = async () => {
+    chrome.runtime.sendMessage({action : 'get isLogin'}, (response) => {
         const {isLogin, userInfo} = response;
         console.log(isLogin, userInfo)
         switch(isLogin){
@@ -41,20 +41,24 @@ const changeLoginStateTextHandler = () => {
     });
 }
 
-const changeModeStateHandler = () => {
-    chrome.runtime.sendMessage({action : 'get mode'}).then(response => {
+const changeModeStateHandler = async () => {
+    chrome.runtime.sendMessage({action : 'get mode'}, (response) => {
         console.log(response)
         modeChanger(response);
-    })
+    });
 }
 
 const modeChanger = (status) => {
     switch(status){
         case true : 
             streamerSwitch.classList.add("on")
+            inputInner[0].classList.remove("on")
+            inputInner[1].classList.add("on")
             break;
         case false :
             streamerSwitch.classList.remove("on")
+            inputInner[0].classList.add("on")
+            inputInner[1].classList.remove("on")
             break;
     }   
 }
@@ -70,6 +74,8 @@ const popupManager = (status) => {
         case "loading" :
             document.querySelector(".loadingPopup").classList.add("on")
             return
+        case "logout" :
+            document.querySelector(".logoutPopup").classList.add("on")
         default :
             return
     }

@@ -31,6 +31,7 @@ chrome.storage.local.get(['isLogin', 'userInfo', 'mode'], (result) => {
     isLogin = result.isLogin ?? false;
     userInfo = result.userInfo ?? {};
     mode = result.mode ?? false;
+    console.log('Loaded state:', {isLogin, userInfo, mode})
 });
 
 /* === 메세지 리스너 === */
@@ -71,5 +72,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
 // 상태를 chrome.storage.local에 저장하는 함수
 function saveState() {
-    chrome.storage.local.set({ isLogin, userInfo, mode });
+    chrome.storage.local.set({ isLogin, userInfo, mode }, () =>{
+        console.log('State saved:', {isLogin, userInfo, mode})
+    });
 }

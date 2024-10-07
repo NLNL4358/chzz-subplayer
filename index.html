@@ -7,6 +7,9 @@
 
     <link rel="stylesheet" href="./css/reset.css">
     <link rel="stylesheet" href="./css/app.css">
+
+     <!-- Video.js CSS -->
+     <link href="https://vjs.zencdn.net/8.16.1/video-js.css" rel="stylesheet" />
 </head>
 <body>
     <div class="indexInner">
@@ -34,23 +37,45 @@
                 <div class="switchCircle"></div>
             </button>
         </div>
+        <div class="input">
+            <div class="inputInner on defaultInputInner">
+                <img class="inputImage" src="./assets/images/inputIcon1.png" alt="">
+                <p class="inputP">닉네임 :</p>
+                <input class="inputField streamerNameInput" type="text" placeholder="스트리머의 닉네임을 입력 해주세요">
+            </div>
+            <div class="inputInner streamerInputInner">
+                <img class="inputImage" src="./assets/images/inputIcon2.png" alt="">
+                <p class="inputP">URL :</p>
+                <input class="inputField urlInput" type="text" placeholder="공유할 영상의 url을 입력 해주세요">
+            </div>
+        </div>
+
+        <div class="video">
+            <video id="my-video" class="video-js" controls preload="auto" width="640" height="264">
+                <source id="videoSource" src="" type="video/mp4">
+                <p class="vjs-no-js">
+                    To view this video please enable JavaScript, and consider upgrading to a web browser that supports HTML5 video.
+                </p>
+            </video>
+        </div>
         
         <!-- Popup -->
         <div class="popup loadingPopup">
             <img class="loadingImage" src="assets/images/loading.gif" alt="loading">
         </div>
-        <div class="popup popupSize1 logoutPopup"> <!-- 아직 적용안됨 -->
-            <h4 class="popupHead">로그아웃 하시겠습니까?</h4>
-            <span>확장 프로그램 내에서 로그아웃이 진행됩니다.</span>
-            <span>로그아웃 하시겠습니까?</span>
-            <div class="popupButtonWrap">
-                <button class="popupNoButton">취소</button>
-                <button class="popupYesButton">확인</button>
+        <div class="popup logoutPopup"> <!-- 아직 적용안됨 -->
+            <div class="popupSize1">
+                <h4 class="popupHead">로그아웃 하시겠습니까?</h4>
+                <div class="popupButtonWrap">
+                    <button class="popupButton popupYesButton">확인</button>
+                    <button class="popupButton popupNoButton">취소</button>
+                </div>
             </div>
         </div>
     </div>
 
     <!-- popup script -->
+     <script src="./js/videoJs.js"></script>
      <script src="./js/domManager.js"></script>
      <script src="./js/user.js"></script>
      <script src="./js/handler.js"></script>
