@@ -27,12 +27,19 @@ let userInfo = {};
 let mode = false;
 
 // 서비스 워커가 시작될 때 저장된 상태를 불러옴
-chrome.storage.local.get(['isLogin', 'userInfo', 'mode'], (result) => {
-    isLogin = result.isLogin ?? false;
-    userInfo = result.userInfo ?? {};
-    mode = result.mode ?? false;
-    console.log('Loaded state:', {isLogin, userInfo, mode})
-});
+const initializeState = () => {
+    return new Promise((resolve) => {
+        chrome.storage.local.get(['isLogin', 'userInfo', 'mode'], (result) => {
+            isLogin = result.isLogin ?? false;
+            userInfo = result.userInfo ?? {};
+            mode = result.mode ?? false;
+            console.log('Loaded state:', {isLogin, userInfo, mode})
+        });
+    });
+};
+
+initializeState();
+
 
 /* === 메세지 리스너 === */
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {

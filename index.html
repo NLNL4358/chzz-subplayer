@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="./css/app.css">
 
      <!-- Video.js CSS -->
-     <link href="https://vjs.zencdn.net/8.16.1/video-js.css" rel="stylesheet" />
+     <!-- <link href="https://vjs.zencdn.net/8.16.1/video-js.css" rel="stylesheet" /> -->
 </head>
 <body>
     <div class="indexInner">
@@ -50,14 +50,21 @@
             </div>
         </div>
 
-        <div class="video">
-            <video id="my-video" class="video-js" controls preload="auto" width="640" height="264">
-                <source id="videoSource" src="" type="video/mp4">
-                <p class="vjs-no-js">
-                    To view this video please enable JavaScript, and consider upgrading to a web browser that supports HTML5 video.
-                </p>
-            </video>
-        </div>
+        <!-- <video
+            id="myPlayer"
+            class="video-js vjs-default-skin vjs-16-9"
+            controls
+            autoplay
+            muted
+            loop
+            style="position: absolute; top: 0; left: 0; overflow:hidden; z-index: -999;"
+            data-setup='{ "techOrder": ["youtube"], "sources": [{ "type": "video/youtube", "src": "https://www.youtube.com/watch?v=OTXU-uRxOQI"}] }'
+            > 
+        </video> -->
+
+        <div id="player"></div>
+
+        <button id="pipButton">버튼</button>
         
         <!-- Popup -->
         <div class="popup loadingPopup">
@@ -75,10 +82,12 @@
     </div>
 
     <!-- popup script -->
-     <script src="./js/videoJs.js"></script>
-     <script src="./js/domManager.js"></script>
-     <script src="./js/user.js"></script>
-     <script src="./js/handler.js"></script>
-     <script src="./js/init.js"></script>
+    <!-- <script src="./js/api/videoJs.js"></script> -->
+    
+    <script src="./js/youtubeJs.js"></script>
+    <script src="./js/domManager.js"></script>
+    <script src="./js/user.js"></script>
+    <script src="./js/handler.js"></script>
+    <script src="./js/init.js"></script>
 </body>
 </html>
