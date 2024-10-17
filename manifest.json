@@ -5,8 +5,10 @@
     "manifest_version" : 3,
     "permissions": [
         "storage",
-        "identity"
+        "identity",
+        "scripting"
     ],    
+    "host_permissions": ["<all_urls>"],
     "action" : {
         "default_icon" : {
             "16" : "./assets/images/icon.png",

@@ -152,6 +152,32 @@
 .inputField::placeholder{
     font-weight: bold;
 }
+
+/* player */
+.player{
+    margin: 1rem 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/* pipButton */
+.pipButton{
+    margin-left: auto;
+    padding: 0.2rem 1rem;
+    border-radius: 2rem;
+    border: 1px solid var(--naver-color);
+    background-color: var(--background-dark);
+    color: white;
+
+    transition: 0.2s;
+}
+    .pipButton:active{
+        background-color: var(--naver-color);
+        color: var(--background-dark);
+        font-weight: bold;
+    }
     
 /* 팝업 */
 .popup{
