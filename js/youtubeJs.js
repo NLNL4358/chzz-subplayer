@@ -59,6 +59,7 @@ function insertIframeToPage(src) {
     wrap.style.background = 'rgba(0, 0, 0, 0.3)'; // 배경색 및 불투명도
     wrap.style.backdropFilter = 'blur(5px)'; // 블러 효과
     wrap.style.cursor = 'move';
+    wrap.style.userSelect = 'none'; // 드래그 방지
     
     const iframe = document.createElement('iframe');
     iframe.src = src;
@@ -68,6 +69,8 @@ function insertIframeToPage(src) {
     iframe.frameBorder = '0';
     iframe.allow = 'autoplay; encrypted-media; picture-in-picture';
     iframe.allowFullscreen = true;
+    iframe.style.pointerEvents = 'none'; // 클릭 이벤트 차단
+    iframe.style.userSelect = 'none';
 
     wrap.appendChild(iframe);
     document.body.appendChild(wrap);
@@ -118,7 +121,7 @@ function insertIframeToPage(src) {
     resizer.style.transform = 'rotate(315deg)';
     resizer.style.position = 'absolute';
     resizer.style.right = '0px';
-    resizer.style.bottom = '0px';
+    resizer.style.bottom = '2px';
     resizer.style.cursor = 'nwse-resize';
 
     element.appendChild(resizer);
@@ -146,6 +149,8 @@ function insertIframeToPage(src) {
       document.removeEventListener('mousemove', resize);
       document.removeEventListener('mouseup', stopResize);
     }
+
+    element.addEventListener('mouseup', stopResize);
   }
 }
 
