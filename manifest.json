@@ -1,35 +1,39 @@
 {
-    "name" : "kjs",
-    "description" : "인턴 프로젝트",
-    "version" : "1.0",
-    "manifest_version" : 3,
+    "name": "kjs",
+    "description": "인턴 프로젝트",
+    "version": "1.0",
+    "manifest_version": 3,
     "permissions": [
         "storage",
         "identity",
         "scripting"
-    ],    
-    "host_permissions": ["<all_urls>"],
-    "action" : {
-        "default_icon" : {
-            "16" : "./assets/images/icon.png",
-            "24" : "./assets/images/icon.png",
-            "32" : "./assets/images/icon.png"
+    ],
+    "host_permissions": [
+        "<all_urls>"
+    ],
+    "action": {
+        "default_icon": {
+            "16": "./assets/images/icon.png",
+            "24": "./assets/images/icon.png",
+            "32": "./assets/images/icon.png"
         },
-        "default_popup" : "index.html"
+        "default_popup": "index.html"
     },
-    "background" : {
-        "service_worker" : "./js/background.js"
+    "background": {
+        "service_worker": "./js/background.js"
     },
     "oauth2": {
         "client_id": "_hmVVnvtB0bPAc6HaaZz",
-        "scopes": ["https://www.googleapis.com/auth/userinfo.email"]
+        "scopes": [
+            "https://www.googleapis.com/auth/userinfo.email"
+        ]
     },
-    "web_accessible_resources":[
+    "web_accessible_resources": [
         {
-            "resources":[
+            "resources": [
                 "assets/images/loading.gif"
             ],
-            "matches":[
+            "matches": [
                 "<all_urls>"
             ]
         }
