@@ -8,13 +8,13 @@ serve(async (req) => {
     headers.set("Access-Control-Allow-Headers", "Content-Type, Authorization");
     return new Response(null, { headers });
   }
-  
+
   // Authorization 헤더 확인
   const authHeader = req.headers.get("Authorization");
   if (!authHeader || !authHeader.startsWith("Bearer ")) {
     return new Response("Unauthorized", { status: 401 });
   }
-  
+
   const url = new URL(req.url);
   const code = url.searchParams.get("code");
 
@@ -22,9 +22,10 @@ serve(async (req) => {
     return new Response("Code not found", { status: 400 });
   }
 
-  const clientId = '_hmVVnvtB0bPAc6HaaZz';
-  const clientSecret = 'I_xHTZ_yWN';
-  const redirectURI = 'https://ykorbmtrpjhatgnhbjbp.supabase.co/functions/v1/get-naver-token';  // Supabase Edge Function URL
+  const clientId = "_hmVVnvtB0bPAc6HaaZz";
+  const clientSecret = "I_xHTZ_yWN";
+  const redirectURI =
+    "https://ykorbmtrpjhatgnhbjbp.supabase.co/functions/v1/get-naver-token"; // Supabase Edge Function URL
 
   const tokenURL = `https://nid.naver.com/oauth2.0/token?grant_type=authorization_code&client_id=${clientId}&client_secret=${clientSecret}&redirect_uri=${redirectURI}&code=${code}`;
 
